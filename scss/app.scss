@@ -29,9 +29,16 @@ h2 {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  @media only screen and (max-width: 45em) {
+    flex-direction: column;
+  }
 }
 .checkout-details {
   width: 50%;
+  @media only screen and (max-width: 45em) {
+    width: 100%;
+    order: 2;
+  }
   form {
     display: flex;
     flex-direction: column;
@@ -52,6 +59,14 @@ h2 {
 .checkout-info {
   width: 50%;
   padding-left: 7rem;
+  @media only screen and (max-width: 62em) {
+    padding-left: 2rem;
+  }
+  @media only screen and (max-width: 45em) {
+    width: 100%;
+    order: 1;
+    padding-left: 0;
+  }
   .card {
     background: #f2f2f2;
     padding: 2rem;
@@ -214,6 +229,7 @@ h2 {
     font-family: inherit;
     min-height: 1.4rem;
     background: transparent;
+    font-weight: 600;
   }
   button {
     width: 1.4rem;
@@ -228,6 +244,8 @@ h2 {
     align-items: center;
     justify-content: center;
     font-family: Helvetica, sans-serif;
+    font-size: 1.2rem;
+    cursor: pointer;
   }
 }
 .checkoutPriceDist {

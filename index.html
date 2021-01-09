@@ -30,7 +30,7 @@
         <h2>Checkout</h2>
         <div class="checkout-grid">
           <div class="checkout-details">
-            <form>
+            <form id="myForm">
               <div class="card">
                 <h4>Contact infomation</h4>
                 <div class="formGroup">
@@ -42,6 +42,7 @@
                       placeholder="Enter your email..."
                       id="email"
                       name="email"
+                      required
                     />
                   </div>
                 </div>
@@ -54,6 +55,7 @@
                       placeholder="Enter your phone..."
                       id="phone"
                       name="phone"
+                      required
                     />
                   </div>
                 </div>
@@ -66,9 +68,11 @@
                     <span class="material-icons">account_circle</span>
                     <input
                       type="text"
-                      placeholder="Sachin Desai"
+                      value="Sachin Desai"
+                      placeholder="Your name.."
                       id="fullName"
                       name="fullName"
+                      required
                     />
                   </div>
                 </div>
@@ -81,6 +85,7 @@
                       placeholder="Your address.."
                       id="address"
                       name="address"
+                      required
                     />
                   </div>
                 </div>
@@ -93,6 +98,7 @@
                       placeholder="Your city.."
                       id="city"
                       name="city"
+                      required
                     />
                   </div>
                 </div>
@@ -101,11 +107,13 @@
                     <label for="country">Country</label>
                     <div class="formControl">
                       <span class="material-icons">public</span>
-                      <select name="country" id="country">
+                      <select name="country" id="country" required>
                         <option value="" disabled selected>
                           Your country..
                         </option>
                         <option value="ind">India</option>
+                        <option value="au">Australia</option>
+                        <option value="nz">New Zealand</option>
                       </select>
                     </div>
                   </div>
@@ -118,6 +126,7 @@
                         placeholder="Your postal code.."
                         id="postalCode"
                         name="postalCode"
+                        required
                       />
                     </div>
                   </div>
@@ -150,7 +159,7 @@
                   </div>
                   <div class="counterGroup">
                     <button type="button">-</button>
-                    <input type="number" />
+                    <input type="number" value="1" />
                     <button type="button">+</button>
                   </div>
                 </div>
@@ -166,9 +175,9 @@
                     <span class="oldPrice">$124.99</span>
                   </div>
                   <div class="counterGroup">
-                    <button type="button">-</button>
-                    <input type="number" />
-                    <button type="button">+</button>
+                    <button type="button" class="minQty">-</button>
+                    <input type="number" class="quantityInput" value="1" />
+                    <button type="button" class="maxQty">+</button>
                   </div>
                 </div>
               </div>
@@ -192,5 +201,48 @@
     <footer>
       <div class="wrapper">Sachin Desai @ DevChallenges.io</div>
     </footer>
+    <script>
+      window.addEventListener("DOMContentLoaded", (event) => {
+        let counterGroup = document.querySelectorAll(".counterGroup");
+        counterGroup.forEach((item) => {
+          let minQty = item.children[0];
+          let quantityInput = item.children[1];
+          let maxQty = item.children[2];
+          let inputVal = parseInt(quantityInput.value);
+          minQty.addEventListener("click", () => {
+            inputVal--;
+            checkVal(inputVal);
+          });
+          maxQty.addEventListener("click", () => {
+            inputVal++;
+            checkVal(inputVal);
+          });
+
+          function checkVal(val) {
+            if (val > 0) {
+              quantityInput.value = inputVal;
+            } else {
+              inputVal = 1;
+              quantityInput.value = 1;
+            }
+          }
+        });
+
+        let myForm = document.getElementById("myForm");
+        myForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          let email = document.getElementById("email").value;
+          let phone = document.getElementById("phone").value;
+          let fullName = document.getElementById("fullName").value;
+          let address = document.getElementById("address").value;
+          let city = document.getElementById("city").value;
+          let country = document.getElementById("country").value;
+          let postalCode = document.getElementById("postalCode").value;
+          alert(
+            `Email: ${email}, Phone: ${phone}, Full Name: ${fullName}, City: ${city}, Country: ${country}, Postal Code: ${postalCode}`
+          );
+        });
+      });
+    </script>
   </body>
 </html>
